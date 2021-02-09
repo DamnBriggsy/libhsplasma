@@ -11,6 +11,11 @@ option(ENABLE_SSE2 "Build with SSE2 CPU instructions" ON)
 
 set(CMAKE_C_FLAGS_DEBUG "-DDEBUG ${CMAKE_C_FLAGS_DEBUG}")
 set(CMAKE_CXX_FLAGS_DEBUG "-DDEBUG ${CMAKE_CXX_FLAGS_DEBUG}")
+
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+  set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/build/install" CACHE PATH "..." FORCE)
+endif()
+
 if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX OR
         CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
     set(WARNING_FLAGS "-Wall -Wextra -Wno-unused-parameter")
@@ -65,3 +70,5 @@ if(ENABLE_NET)
 endif()
 
 install(EXPORT HSPlasma-targets DESTINATION share/cmake/HSPlasma)
+
+install(EXPORT HSPlasmaNet-targets DESTINATION share/cmake/HSPlasmaNet)
